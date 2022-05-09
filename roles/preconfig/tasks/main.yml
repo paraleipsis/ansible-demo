@@ -13,6 +13,7 @@
              - curl 
              - gnupg 
              - lsb-release
+             - python3-pip
             update-cache: yes
             cache_valid_time: 86400
 
@@ -58,6 +59,12 @@
             dest: /usr/local/bin/docker-compose
             mode: 0755
       become: yes
+
+    - name: Настройка дополнительных пакетов python
+      block:
+        - name: Установка pip пакетов
+          pip:
+            name: docker
 
     - name: Завершение установки
       block:
