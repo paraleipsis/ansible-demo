@@ -1,6 +1,9 @@
 argument_specs:
   main:
-    short_description: Настройка серверов для работы с Docker
+    description: Настройка серверов для работы с Docker
     author: Автор1
+    license: MIT  
+    min_ansible_version: 2.9
+    platforms: Ubuntu
 dependencies:
   - role: deploy
