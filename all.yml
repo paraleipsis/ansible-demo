@@ -1,0 +1,7 @@
+---
+- name: All configs
+  hosts: cluster
+  connection: local
+  roles:
+    - preconfig
+    - deploy

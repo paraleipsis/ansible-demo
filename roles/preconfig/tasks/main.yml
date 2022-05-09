@@ -1,13 +1,9 @@
 ---
-- name: Preconfig
-  hosts: cluster
-  connection: local
-  tasks:
     - name: Установка докера
       block:
         - name: Добавляем universe
           apt_repository:
-            repo: "deb http://us.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }} main"
+            repo: "deb http://us.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }} universe"
             state: present
 
         - name: Установка дополнительных пакетов
@@ -68,9 +64,9 @@
         - name: Добавление пользоателя в группу докер
           user:
             name: "{{ ansible_user }}"
-            group: docker
+            groups: docker
             append: yes
 
-        - name: Перезагрузка сервера
-          reboot:
+        #- name: Перезагрузка сервера
+        #  reboot:
       become: yes
