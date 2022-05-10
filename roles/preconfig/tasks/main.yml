@@ -5,6 +5,7 @@
           apt_repository:
             repo: "deb http://us.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }} universe"
             state: present
+          # tags: universe
 
         - name: Установка дополнительных пакетов
           apt: 
@@ -43,7 +44,7 @@
             name: docker
             state: restarted
             enabled: yes
-      become: yes
+      become: true
 
     - name: Установка docker-compose
       block:

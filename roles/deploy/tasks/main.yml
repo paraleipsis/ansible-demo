@@ -1,0 +1,5 @@
+---
+    - name: Задача deploy
+      command: "echo {{ test }}"
+      regisret: res
+      changed_when: "'0' in res.stdout"
