@@ -1,6 +1,6 @@
 # ansible-demo
 inventory - contain cluster of swarm nodes: deploy, managers, workers
-\n
+
 
 ansible roles:
 
