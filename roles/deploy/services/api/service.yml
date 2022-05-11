@@ -8,7 +8,7 @@
     - name: "[{{ name }}] Удаляем сервис"
       community.docker.docker_swarm_service:
         name: "{{ name }}"
-        state: abcent
+        state: absent
 
     - name: "[{{ name }}] Создаем секрет"
       include_tasks: "../secret.yml"
