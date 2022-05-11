@@ -2,3 +2,13 @@
 rmq:
   user: admin
   password: admin
+
+rmqDefaults:
+  - name: AMQP_EXCHANGE
+    value: exhg_integrations
+  - name: AMQP_USER
+    value: "{{ rmq.user }}"
+  - name: AMQP_PASSWORD
+    value: "{{ rmq.password }}"
+  - name: AMQP_HOSTNAME
+    value: rmq
