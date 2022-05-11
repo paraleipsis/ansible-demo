@@ -1,27 +1,17 @@
 ---
 - name: "[{{ name }}] Конфигурация секрета"
-  block:
-    - name: "[{{ name }}] Создаем секрет"
-      include_tasks: "../secret.yml"
-
-  rescue:
-    - name: "[{{ name }}] Удаляем сервис"
-      community.docker.docker_service:
-        name: "{{ name }}"
-        state: abcent
-
-    - name: "[{{ name }}] Создаем секрет"
-      include_tasks: "../secret.yml"
+  include: "../secret.yml"
 
 - name: "[{{ name }}] Выкладка сервиса"
   block:
     - name: "[{{ name }}] Выкладываем сервис"
-      community.docker.docker_service:
+      community.docker.docker_swarm_service:
         name: "{{ name }}"
-        image: localhost:5000/api:latest
+        image: "{{ registry_name }}{{ name }}:{{ version }}"
         state: present
+        force_update: true
         networks:
-          - name: "{{ networkName }}"
+          - name: "{{ network_name }}"
         publish:
           - mode: ingress
             protocol: tcp
@@ -30,3 +20,4 @@
         secrets:
           - secret_name: "{{ name }}.env"
             filename: "/opt/app/.env"
+  tags: "{{ name }}"
