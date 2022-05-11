@@ -2,7 +2,7 @@
 - name: "[{{ name }}] Конфигурация секрета"
   block:
     - name: "[{{ name }}] Создаем секрет"
-      include: "../secret.yml"
+      include_tasks: "../secret.yml"
 
   rescue:
     - name: "[{{ name }}] Удаляем сервис"
@@ -11,7 +11,7 @@
         state: abcent
 
     - name: "[{{ name }}] Создаем секрет"
-      include: "../secret.yml"
+      include_tasks: "../secret.yml"
 
 - name: "[{{ name }}] Выкладка сервиса"
   block:
