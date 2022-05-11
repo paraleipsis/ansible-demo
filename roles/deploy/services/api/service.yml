@@ -6,7 +6,7 @@
 
   rescue:
     - name: "[{{ name }}] Удаляем сервис"
-      community.docker.docker_service:
+      community.docker.docker_swarm_service:
         name: "{{ name }}"
         state: abcent
 
@@ -16,7 +16,7 @@
 - name: "[{{ name }}] Выкладка сервиса"
   block:
     - name: "[{{ name }}] Выкладываем сервис"
-      community.docker.docker_service:
+      community.docker.docker_swarm_service:
         name: "{{ name }}"
         image: localhost:5000/api:latest
         state: present
