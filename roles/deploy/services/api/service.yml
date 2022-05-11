@@ -1,0 +1,32 @@
+---
+- name: "[{{ name }}] Конфигурация секрета"
+  block:
+    - name: "[{{ name }}] Создаем секрет"
+      include: "../secret.yml"
+
+  rescue:
+    - name: "[{{ name }}] Удаляем сервис"
+      community.docker.docker_service:
+        name: "{{ name }}"
+        state: abcent
+
+    - name: "[{{ name }}] Создаем секрет"
+      include: "../secret.yml"
+
+- name: "[{{ name }}] Выкладка сервиса"
+  block:
+    - name: "[{{ name }}] Выкладываем сервис"
+      community.docker.docker_service:
+        name: "{{ name }}"
+        image: localhost:5000/api:latest
+        state: present
+        networks:
+          - name: "{{ networkName }}"
+        publish:
+          - mode: ingress
+            protocol: tcp
+            published_port: 3002
+            target_port: 3000
+        secrets:
+          - secret_name: "{{ name }}.env"
+            filename: "/opt/app/.env"
