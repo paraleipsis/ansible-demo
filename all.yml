@@ -9,7 +9,8 @@
       tags: build
     - role: deploy
       tags: deploy
-    # - swarm_init
+    - role: swarm_init
+      tags: swarm_init
 
 - name: Manager
   hosts: managers
