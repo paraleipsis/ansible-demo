@@ -6,19 +6,19 @@
   register: token
 
 - name: Наличие директории
-  local_action:
-    module: file
+  file:
     path: ./tokens
     state: directory
+  delegate_to: localhost
 
 - name: Сохранение токена manager
-  local_action:
-    module: copy
+  copy:
     dest: ./tokens/token-manager
     content: "{{ token.swarm_facts.JoinTokens.Manager }}"
+  delegate_to: localhost
 
 - name: Сохранение токена worker
-  local_action:
-    module: copy
+  copy:
     dest: ./tokens/token-worker
     content: "{{ token.swarm_facts.JoinTokens.Worker }}"
+  delegate_to: localhost
