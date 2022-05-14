@@ -2,7 +2,7 @@
 - name: Подключение к swarm
   community.docker.docker_swarm:
     state: join
-    remote_addr: "{{ advertise_addr }}"
+    remote_addrs: "{{ advertise_addr }}"
     join_token: >
       {{
         hostvars['server1']['ansible_facts']['token_worker']
