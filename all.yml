@@ -12,7 +12,7 @@
     - role: swarm_init
       tags: swarm_init
     - role: swarm_leave
-      node_name: server2
+      node_name: para-server
       tags: swarm_leave
 
 - name: Manager
